@@ -74,10 +74,7 @@
       }).then(
         () => {
           console.log("get favs");
-          res.render("favRecipes", {
-            title: data.title,
-            ingredients: data.ingredients,
-          });
+          res.render("favRecipes");
         }
       )
     });

@@ -5,7 +5,7 @@
       "database": "dinner_db",
       "host": "127.0.0.1",
       "dialect": "mysql",
-      "port": "3315"
+      "port": "3320"
     },
     "test": {
       "username": "bd869b22db3863",
