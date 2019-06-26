@@ -60,21 +60,18 @@
       }); //ajax post
     }); //on click fav
 
-    $("#nav").on("click", "#favsButton", function (e) {
+    $("#favs").on("click", "#getFavs", function (e) {
       e.preventDefault();
       console.log("clicked favs");
-      const userID = req.session.passport.user
-      $.ajax("/api/results" + userID, {
+      // const userID = req.session.passport.user
+      $.ajax("/api/results/", {
         type: "GET",
-        data: {
-          title: title,
-          ingredients: ingredients,
-          link: href,
-        }
+        // dataType: "json",
       }).then(
         () => {
-          console.log("get favs");
           res.render("favRecipes");
+          console.log("get favs");
+         
         }
       )
     });
