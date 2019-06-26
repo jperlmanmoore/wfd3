@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 const exphbs = require("express-handlebars");
-const helpers = require("handlebars-helpers");
+const helpers = require("handlebars-helpers")();
 
 
 const passport = require("passport");

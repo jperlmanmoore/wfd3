@@ -64,14 +64,12 @@
       e.preventDefault();
       console.log("clicked favs");
       // const userID = req.session.passport.user
-      $.ajax("/api/results/", {
+      $.ajax("/api/results", {
         type: "GET",
-        // dataType: "json",
+        dataType: "json",
       }).then(
         () => {
-          res.render("favRecipes");
-          console.log("get favs");
-         
+          console.log("get favs"); 
         }
       )
     });

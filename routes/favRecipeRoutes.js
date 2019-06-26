@@ -5,20 +5,32 @@ module.exports = (app) => {
     // Get all examples
     app.get("/api/results", (req, res) => {
         if (req.isAuthenticated()) {
-            db.results.findAll({
+            db.user.findOne(
+                {
                 where: {
-                   userID: req.session.passport.user
+                   id: req.session.passport.user
                 }
+            }).then(function (dbResults){
+                db.results.findAll({
+                    include: [db.user],
+                    where: {
+                        id: req.session.passport.user
+                    }
+                }).then(function (dbResults){
+                    res.render("favRecipes", {
+                        title: dbResults,
+                        ingredients: dbResults
+                    })
+                })
             })
-                .then(() => {
-                    res.render("favRecipes");  
-                });
-        } else {
-            res.redirect("/search");
-        } 
-    });
-    
-    
+        };
+            
+        //     .then((dbResults) => {
+        //             res.json(dbResults);  
+        //         });
+        // } else {
+        //     res.redirect("/search");
+        // }    
 
     // app.get("/api/results/:userID", (req, res) => {
     //     db.users.findOne({
@@ -55,6 +67,7 @@ module.exports = (app) => {
     //     })
     // }); 
 
-console.log("recipeSearchRoutes available");
 
+    });
+    console.log("favRecipeRoutes available");
 }
