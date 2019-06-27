@@ -57,7 +57,7 @@
           "title": title,
           "link": link,
           "ingredients": ingredients,
-          // "user_id": req.session.passport.user.id
+          "user_id": req.session.passport.user.id
         }
       }); //ajax post
     }); //on click fav
