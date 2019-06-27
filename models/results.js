@@ -26,12 +26,12 @@ module.exports = function(sequelize, DataTypes) {
         user_id:
         {
             type: DataTypes.INTEGER,
-            allowNull: flase, 
+            allowNull: false, 
         }
     });
     results.associate = function(models) {
         results.belongsTo(models.user, {
-            foreignKey: "userId",
+            foreignKey: "user_id",
             allowNull: false
         });
     };

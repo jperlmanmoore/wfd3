@@ -1,62 +1,59 @@
 const db = require("../models");
 
-module.exports = (app) => {
+module.exports = app => {
 
-    app.get("/api/users", (req, res) => {
-        db.users.findAll({
-            include: [{
-                model: db.favs,    
-            }]
-        }).then(users => {
-            const resObj = users.map(user => {
-                return Object.assign(
-                    {},
-                    {
-                        user_id: user.user_id,
-                        username: username,
-                        favs: user.favs.map(post => {
-                            return Object.assign(
-                                {},
-                                {
-                                    fav_id: fav.id,
-                                    user_id: fav.user_id,
-                                    title:
-                                }
-                                
-                            )
-                        })
-                    }
-                )
-            })
-        })
-    })
-
-
-
+    // app.get("/api/users", (req, res) => {
+    //     db.users.findAll({
+    //         include: [{
+    //             model: db.results,    
+    //         }]
+    //     }).then(users => {
+    //         const resObj = users.map(user => {
+    //             return Object.assign(
+    //                 {},
+    //                 {
+    //                     user_id: user.user_id,
+    //                     username: username,
+    //                     results: user.results.map(results => {
+    //                         return Object.assign(
+    //                             {},
+    //                             {
+    //                                 results_id: results.id,
+    //                                 user_id: results.user_id,
+    //                                 title: dbResults,
+    //                                 ingredients: dbResults
+    //                             } 
+    //                         )
+    //                     })
+    //                 }
+    //             )
+    //         });
+    //         res.json(resObj);
+    //     });
+    // })
 
     // Get all examples
-    // app.get("/api/results", (req, res) => {
+    app.get("/api/results", (req, res) => {
         
-    //         db.user.findOne(
-    //             {
-    //             where: {
-    //                id: req.session.passport.user
-    //             }
-    //         }).then(function (dbResults){
-    //             db.results.findAll({
-    //                 include: [db.user],
-    //                 where: {
-    //                     id: req.session.passport.user
-    //                 }
-    //             }).then(function (dbResults){
-    //                 res.render("favRecipes", {
-    //                     title: dbResults,
-    //                     ingredients: dbResults
-    //                 });
-    //             });
-    //         });
-       
-            
+            db.user.findOne(
+                {
+                where: {
+                   id: req.session.passport.user
+                }
+            }).then(() => {
+                db.results.findAll({
+                    include: [db.user],
+                    where: {
+                        id: req.session.passport.user.id
+                    }
+                }).then(dbResults => {
+                    res.render("favRecipes", {
+                        title: dbResults,
+                        ingredients: dbResults
+                    });
+                });
+            });
+        });            
        
 
     // app.get("/api/results/:userID", (req, res) => {
@@ -79,22 +76,22 @@ module.exports = (app) => {
     //     });
     // });
 
-    // app.post("/api/results", (req, res) => {
-    //     console.log("post results");
+    app.post("/api/results", (req, res) => {
+        console.log("post results");
 
-    //     const resultsObj = {
-    //         title: req.body.title,
-    //         ingredients: req.body.ingredients,
-    //         userID: req.session.passport.user.id
-    //     };
-    //     console.log(resultsObj);
-    //     db.results.create(resultsObj).then(dbresults => {
-    //         res.json(dbresults);
-    //         console.log("created");
-    //     })
-    // }); 
+        const resultsObj = {
+            title: req.body.title,
+            ingredients: req.body.ingredients,
+            user_id: req.session.passport.user.id
+        };
+        console.log(resultsObj);
+        db.results.create(resultsObj).then(dbresults => {
+            res.json(dbresults);
+            console.log("created");
+        })
+    }); 
 
-
-    });
     console.log("favRecipeRoutes available");
-}
+// });
+
+};

@@ -23,7 +23,7 @@
             $("#searchResults").append(`<div class="card z-depth-5">
   <div class="card-image, recipeCard">
     <span class="card-title">${results.title}</span>
-    <a class="addRec btn btn-floating halfway-fab waves-effect waves-light #ef9a9a red lighten-3"> <i class="material-icons">favorite_border</i></a>
+    <a class="addRec btn btn-floating waves-effect waves-light #ef9a9a red lighten-3"> <i class="material-icons">favorite_border</i></a>
   </div>
   <div class="card-content">
     <p>${results.ingredients}</p>
@@ -60,20 +60,25 @@
       }); //ajax post
     }); //on click fav
 
+    
     $("#favs").on("click", "#getFavs", function (e) {
       e.preventDefault();
-      console.log("clicked favs");
-      // const userID = req.session.passport.user
-      $.ajax("/api/results", {
-        type: "GET",
-        dataType: "json",
-        data: {
-          "title": results.title, 
-          "ingredients": results.ingredients
-      }
-      }).then(
-        () => {console.log("get favs");}
-      )
-    });
-      
-    }); // document
+      console.log("clicked favs"); 
+        $.ajax("/api/results/", {
+          type: "GET",
+          dataType: "json",
+          // data: {
+          //   "title": results.title,
+          //   "ingredients": results.ingredients
+          // }
+        })
+        .then(
+          console.log("get favs")
+        );
+    }); //end click getFavs
+    
+
+
+
+
+  }); // document
