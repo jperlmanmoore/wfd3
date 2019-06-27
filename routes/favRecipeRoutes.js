@@ -38,7 +38,7 @@ module.exports = app => {
             db.user.findOne(
                 {
                 where: {
-                   id: req.session.passport.user
+                   id: req.session.passport.user.id
                 }
             }).then(() => {
                 db.results.findAll({
