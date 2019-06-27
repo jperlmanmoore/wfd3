@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
             notEmpty: true
         },
        
-        userID:
+        user_id:
         {
             type: DataTypes.INTEGER,
             notEmpty: true, 

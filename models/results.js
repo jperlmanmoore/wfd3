@@ -23,10 +23,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             notEmpty: false
         },
-        userID:
+        user_id:
         {
             type: DataTypes.INTEGER,
-            notEmpty: true, 
+            allowNull: flase, 
         }
     });
     results.associate = function(models) {

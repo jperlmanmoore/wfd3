@@ -2,27 +2,59 @@ const db = require("../models");
 
 module.exports = (app) => {
 
-    // Get all examples
-    app.get("/api/results", (req, res) => {
-        
-            db.user.findOne(
-                {
-                where: {
-                   id: req.session.passport.user
-                }
-            }).then(function (dbResults){
-                db.results.findAll({
-                    include: [db.user],
-                    where: {
-                        id: req.session.passport.user
+    app.get("/api/users", (req, res) => {
+        db.users.findAll({
+            include: [{
+                model: db.favs,    
+            }]
+        }).then(users => {
+            const resObj = users.map(user => {
+                return Object.assign(
+                    {},
+                    {
+                        user_id: user.user_id,
+                        username: username,
+                        favs: user.favs.map(post => {
+                            return Object.assign(
+                                {},
+                                {
+                                    fav_id: fav.id,
+                                    user_id: fav.user_id,
+                                    title:
+                                }
+                                
+                            )
+                        })
                     }
-                }).then(function (dbResults){
-                    res.render("favRecipes", {
-                        title: dbResults,
-                        ingredients: dbResults
-                    });
-                });
-            });
+                )
+            })
+        })
+    })
+
+
+
+
+    // Get all examples
+    // app.get("/api/results", (req, res) => {
+        
+    //         db.user.findOne(
+    //             {
+    //             where: {
+    //                id: req.session.passport.user
+    //             }
+    //         }).then(function (dbResults){
+    //             db.results.findAll({
+    //                 include: [db.user],
+    //                 where: {
+    //                     id: req.session.passport.user
+    //                 }
+    //             }).then(function (dbResults){
+    //                 res.render("favRecipes", {
+    //                     title: dbResults,
+    //                     ingredients: dbResults
+    //                 });
+    //             });
+    //         });
        
             
        
