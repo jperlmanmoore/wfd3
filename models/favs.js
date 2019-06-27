@@ -23,12 +23,12 @@ module.exports = function(sequelize, DataTypes) {
             notEmpty: true, 
         }
     });
-    favs.associate = function(models) {
-        favs.belongsTo(models.user, {
-            foreignKey: "userId",
-            allowNull: false
-        });
-    };
+    // favs.associate = function(models) {
+    //     favs.belongsTo(models.user, {
+    //         foreignKey: "userId",
+    //         allowNull: false
+    //     });
+    // };
     
     return favs;
 
