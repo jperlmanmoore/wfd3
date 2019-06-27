@@ -67,10 +67,12 @@
       $.ajax("/api/results", {
         type: "GET",
         dataType: "json",
+        data: {
+          "title": results.title, 
+          "ingredients": results.ingredients
+      }
       }).then(
-        () => {
-          console.log("get favs"); 
-        }
+        () => {console.log("get favs");}
       )
     });
       

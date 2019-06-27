@@ -4,7 +4,7 @@ module.exports = (app) => {
 
     // Get all examples
     app.get("/api/results", (req, res) => {
-        if (req.isAuthenticated()) {
+        
             db.user.findOne(
                 {
                 where: {
@@ -20,17 +20,12 @@ module.exports = (app) => {
                     res.render("favRecipes", {
                         title: dbResults,
                         ingredients: dbResults
-                    })
-                })
-            })
-        };
+                    });
+                });
+            });
+       
             
-        //     .then((dbResults) => {
-        //             res.json(dbResults);  
-        //         });
-        // } else {
-        //     res.redirect("/search");
-        // }    
+       
 
     // app.get("/api/results/:userID", (req, res) => {
     //     db.users.findOne({
