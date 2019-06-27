@@ -44,7 +44,7 @@ module.exports = app => {
                 db.results.findAll({
                     include: [db.user],
                     where: {
-                        id: req.session.passport.user.id
+                        user_id: req.session.passport.user.id
                     }
                 }).then(dbResults => {
                     res.render("favRecipes", {

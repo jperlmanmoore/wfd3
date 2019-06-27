@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     });
     favs.associate = function(models) {
         favs.belongsTo(models.user, {
-            foreignKey: "userId",
+            foreignKey: "user_id",
             allowNull: false
         });
     };
